@@ -1,0 +1,53 @@
+-- -- =====================================================
+-- -- DATA.SQL - Carga automática de datos iniciales
+-- -- Spring Boot ejecuta este archivo después de schema.sql
+-- -- =====================================================
+--
+-- -- Insertar categorías
+-- INSERT INTO categorias (nombre, descripcion, tiempo_estimado_horas, activo) VALUES
+--                                                                                 ('Hardware', 'Problemas con componentes físicos', 24, TRUE),
+--                                                                                 ('Software', 'Problemas con aplicaciones y sistemas', 12, TRUE),
+--                                                                                 ('Redes', 'Problemas de conectividad y red', 48, TRUE),
+--                                                                                 ('Base de Datos', 'Problemas con bases de datos', 36, TRUE),
+--                                                                                 ('Seguridad', 'Problemas de seguridad y accesos', 72, TRUE),
+--                                                                                 ('Correo', 'Problemas con correo electrónico', 24, TRUE),
+--                                                                                 ('Sitio Web', 'Problemas con páginas web', 48, TRUE),
+--                                                                                 ('Otros', 'Problemas no clasificados', 72, TRUE);
+--
+-- -- Insertar clientes
+-- INSERT INTO clientes (nombre, apellido, email, telefono, empresa, activo) VALUES
+--                                                                               ('Juan', 'Pérez', 'juan.perez@empresa.com', '555-0101', 'Tech Solutions S.A.', TRUE),
+--                                                                               ('María', 'González', 'maria.gonzalez@empresa.com', '555-0102', 'Digital Innovations', TRUE),
+--                                                                               ('Carlos', 'Rodríguez', 'carlos.rodriguez@negocio.com', '555-0103', 'Data Center Corp', TRUE),
+--                                                                               ('Ana', 'Martínez', 'ana.martinez@startup.com', '555-0104', 'Cloud Services', TRUE),
+--                                                                               ('Luis', 'Sánchez', 'luis.sanchez@empresa.com', '555-0105', 'Tech Solutions S.A.', TRUE);
+--
+-- -- Insertar técnicos
+-- INSERT INTO tecnicos (nombre, apellido, email, telefono, rol, especialidad, activo) VALUES
+--                                                                                         ('Roberto', 'García', 'roberto.garcia@soporte.com', '555-1001', 'SUPERVISOR', 'Hardware, Redes', TRUE),
+--                                                                                         ('Elena', 'López', 'elena.lopez@soporte.com', '555-1002', 'SOPORTE_NIVEL3', 'Software, Base de Datos', TRUE),
+--                                                                                         ('Miguel', 'Hernández', 'miguel.hernandez@soporte.com', '555-1003', 'SOPORTE_NIVEL2', 'Redes, Seguridad', TRUE),
+--                                                                                         ('Carmen', 'Díaz', 'carmen.diaz@soporte.com', '555-1004', 'SOPORTE_NIVEL1', 'Soporte General', TRUE),
+--                                                                                         ('Andrés', 'Moreno', 'andres.moreno@soporte.com', '555-1005', 'ADMINISTRADOR', 'Todos', TRUE);
+--
+-- -- Insertar tickets
+-- INSERT INTO tickets (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id, categoria_id, fecha_creacion, activo) VALUES
+--                                                                                                                                                        ('TKT-2024001', 'Computadora no enciende', 'La PC no responde al botón de encendido', 'ABIERTO', 'ALTA', 1, NULL, 1, DATE_SUB(NOW(), INTERVAL 2 DAY), TRUE),
+--                                                                                                                                                        ('TKT-2024002', 'Servidor BD lento', 'Consultas muy lentas en producción', 'EN_PROCESO', 'CRITICA', 2, 2, 4, DATE_SUB(NOW(), INTERVAL 1 DAY), TRUE),
+--                                                                                                                                                        ('TKT-2024003', 'Error de impresión', 'No se puede imprimir desde ninguna aplicación', 'RESUELTO', 'MEDIA', 3, 3, 1, DATE_SUB(NOW(), INTERVAL 5 DAY), TRUE),
+--                                                                                                                                                        ('TKT-2024004', 'VPN no conecta', 'Usuarios remotos no pueden acceder', 'EN_PROCESO', 'ALTA', 4, 3, 3, DATE_SUB(NOW(), INTERVAL 3 DAY), TRUE),
+--                                                                                                                                                        ('TKT-2024005', 'Actualizar sistema', 'Solicitud de actualización de software', 'CERRADO', 'BAJA', 5, 4, 2, DATE_SUB(NOW(), INTERVAL 10 DAY), TRUE);
+--
+-- -- Insertar comentarios
+-- INSERT INTO comentarios (contenido, es_interno, ticket_id, cliente_id, tecnico_id, fecha_creacion) VALUES
+--                                                                                                        ('Ya revisé los cables y todo está bien conectado', FALSE, 1, 1, NULL, DATE_SUB(NOW(), INTERVAL 2 DAY)),
+--                                                                                                        ('Asignado a soporte nivel 2 para revisión', TRUE, 1, NULL, 1, DATE_SUB(NOW(), INTERVAL 1 DAY)),
+--                                                                                                        ('Se está analizando el plan de acción', TRUE, 2, NULL, 2, DATE_SUB(NOW(), INTERVAL 23 HOUR)),
+--                                                                                                        ('El problema era el driver desactualizado', FALSE, 3, NULL, 3, DATE_SUB(NOW(), INTERVAL 3 DAY)),
+--                                                                                                        ('Gracias, ya funciona correctamente', FALSE, 3, 3, NULL, DATE_SUB(NOW(), INTERVAL 3 DAY));
+--
+-- -- Insertar historial
+-- INSERT INTO historial_tickets (ticket_id, campo_modificado, valor_anterior, valor_nuevo, usuario_modifico, fecha_modificacion) VALUES
+--                                                                                                                                    (2, 'estado', 'ABIERTO', 'EN_PROCESO', 'elena.lopez@soporte.com', DATE_SUB(NOW(), INTERVAL 23 HOUR)),
+--                                                                                                                                    (3, 'estado', 'EN_PROCESO', 'RESUELTO', 'miguel.hernandez@soporte.com', DATE_SUB(NOW(), INTERVAL 3 DAY)),
+--                                                                                                                                    (4, 'tecnico_asignado_id', NULL, '3', 'roberto.garcia@soporte.com', DATE_SUB(NOW(), INTERVAL 2 DAY));
