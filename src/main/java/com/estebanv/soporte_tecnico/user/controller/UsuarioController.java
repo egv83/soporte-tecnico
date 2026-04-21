@@ -3,10 +3,7 @@ package com.estebanv.soporte_tecnico.user.controller;
 import com.estebanv.soporte_tecnico.user.controller.dto.request.UserUpdateRequest;
 import com.estebanv.soporte_tecnico.user.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -18,7 +15,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(
             @PathVariable Long id,
             @RequestBody UserUpdateRequest request

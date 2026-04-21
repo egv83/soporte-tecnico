@@ -30,6 +30,7 @@ CREATE TABLE categoria (
 -- =====================================================
 CREATE TABLE cliente (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                          identificacion VARCHAR(20) UNIQUE,
                           nombre VARCHAR(100) NOT NULL,
                           apellido VARCHAR(100) NOT NULL,
                           email VARCHAR(150) NOT NULL UNIQUE,

@@ -18,6 +18,6 @@ spring:
   sql:
     init:
 #      always never
-      mode: always
+      mode: never
       schema-locations: classpath:db/mysql/automatico/schema.sql
 #      data-locations: classpath:db/mysql/automatico/data.sql

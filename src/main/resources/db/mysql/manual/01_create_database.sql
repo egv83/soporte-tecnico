@@ -47,7 +47,8 @@ CREATE TABLE categoria (
 -- 2.2 Tabla de clientes
 DROP TABLE IF EXISTS cliente CASCADE;
 CREATE TABLE cliente (
-                          id SERIAL PRIMARY KEY COMMENT 'Identificador único',
+                          id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT 'Id auto incrementable',
+                          identificacion VARCHAR(20) UNIQUE COMMENT 'Identificación único',,
                           nombre VARCHAR(100) NOT NULL COMMENT 'Nombre del cliente',
                           apellido VARCHAR(100) NOT NULL COMMENT 'Apellido del cliente',
                           email VARCHAR(150) NOT NULL UNIQUE COMMENT 'Correo electrónico',

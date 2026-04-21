@@ -5,12 +5,11 @@ import java.time.LocalDateTime;
 public record ErrorResponse(
         String message,
         int status,
-        LocalDateTime timestamp,
-        String path
+        LocalDateTime timestamp
 ) {
 
-    public static ErrorResponse create(String message,  int status, String path){
-        return new ErrorResponse(message,status,LocalDateTime.now(), path);
+    public static ErrorResponse create(String message,  int status){
+        return new ErrorResponse(message,status,LocalDateTime.now());
     }
 
 }
