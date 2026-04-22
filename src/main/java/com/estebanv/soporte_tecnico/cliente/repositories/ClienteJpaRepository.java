@@ -6,12 +6,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, Long> {
 
     Optional<ClienteEntity> findById(String nombre);
+
+    @Query(
+            nativeQuery = false,
+            value = "SELECT c FROM ClienteEntity c WHERE c.isActivo = true"
+    )
+    List<ClienteEntity> findAllByIsActivo();
+
 
     @Query(
             nativeQuery = false,

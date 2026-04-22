@@ -1,19 +1,17 @@
 package com.estebanv.soporte_tecnico.cliente.entities;//package com.estebanv.soporte_tecnico.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @Entity
 @Table(name = "cliente")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ClienteEntity {
 
     @Id

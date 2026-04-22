@@ -6,7 +6,7 @@ public record ClienteUpdateRequest(
         String apellido,
         String email,
         String telefono,
-        String empresa
-
+        String empresa,
+        Boolean activo
 ) {
 }

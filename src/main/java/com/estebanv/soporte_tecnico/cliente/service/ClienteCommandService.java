@@ -10,7 +10,7 @@ public interface ClienteCommandService {
 
     ClienteResponse create(ClienteCreateRequest request);
 
-    ClienteResponse update(ClienteUpdateRequest request, Long id);
+    void update(ClienteUpdateRequest request, Long id);
 
     void delete(Long id);
 

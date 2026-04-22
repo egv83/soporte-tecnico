@@ -25,11 +25,11 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllClientes(){
+    public ResponseEntity<?> getAllClientes() {
 
         var clientes = clienteQueryService.getAllClientes();
 
-        if(clientes.isEmpty()){
+        if (clientes.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(clientes);
@@ -38,10 +38,10 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getClienteById(
             @PathVariable Long id
-    ){
+    ) {
         var cliente = clienteQueryService.getClienteById(id);
 
-        if(Objects.isNull(cliente)){
+        if (Objects.isNull(cliente)) {
             return ResponseEntity.noContent().build();
         }
 
@@ -49,8 +49,24 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody ClienteCreateRequest request){
+    public ResponseEntity<?> create(@Valid @RequestBody ClienteCreateRequest request) {
         return new ResponseEntity<>(clienteCommandService.create(request), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @RequestBody ClienteUpdateRequest request,
+            @PathVariable("id") Long id
+    ) {
+        clienteCommandService.update(request,id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@Valid @PathVariable("id") Long id) {
+
+        clienteCommandService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

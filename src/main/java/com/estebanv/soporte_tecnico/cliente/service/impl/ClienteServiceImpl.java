@@ -13,9 +13,11 @@ import com.estebanv.soporte_tecnico.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -32,6 +34,9 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
         return clienteJpaRepository.findById(id).
                 map(
                         entity -> {
+                            if (!entity.getIsActivo()) {
+                                throw new ClienteException("El cliente esta inactivo");
+                            }
                             return clienteMapper.toResponse(entity);
                         }
                 )
@@ -47,7 +52,7 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
     public List<ClienteResponse> getAllClientes() {
         log.info("***** CONSULTA DE CLIENTE POR ID *****");
 
-        return clienteJpaRepository.findAll()
+        return clienteJpaRepository.findAllByIsActivo()
                 .stream()
                 .map(
                         clienteMapper::toResponse
@@ -59,9 +64,9 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
         log.info("***** REGISTRI DE CLIENTE *****");
         var cliente = clienteJpaRepository.findByIdentificacion(request.identificacion());
 
-        if(cliente.isPresent()){
-            log.warn("El cliente ya existe con identificación: {}",request.identificacion());
-            throw new ClienteException("El cliente ya existe con identificación: %s",request.identificacion());
+        if (cliente.isPresent()) {
+            log.warn("El cliente ya existe con identificación: {}", request.identificacion());
+            throw new ClienteException("El cliente ya existe con identificación: %s", request.identificacion());
         }
 
         return clienteMapper.toResponse(
@@ -72,6 +77,7 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
                                 .apellido(request.apellido())
                                 .email(request.email())
                                 .telefono(request.telefono())
+                                .empresa(request.empresa())
                                 .isActivo(true)
                                 .fechaRegistro(LocalDateTime.now())
                                 .build()
@@ -80,12 +86,58 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
     }
 
     @Override
-    public ClienteResponse update(ClienteUpdateRequest request, Long id) {
-        return null;
+    public void update(ClienteUpdateRequest request, Long id) {
+        log.info("***** Actualización DE CLIENTE *****");
+
+        log.info("***** ELIMINACION LOGICA DE CLIENTE *****");
+        ClienteEntity cliente = clienteJpaRepository.findById(id)
+                .orElseThrow(() -> {
+                            log.warn("Cliente no encontrado con id: {}", id);
+                            throw new ClienteException("Cliente no encontrado con id: %s", String.valueOf(id));
+                        }
+                );
+
+        ClienteEntity clienteUpdate = cliente.toBuilder()
+                .nombre(StringUtils.hasText(request.nombre()) ? request.nombre() :
+                        cliente.getNombre())
+                .apellido(StringUtils.hasText(request.apellido()) ? request.apellido() :
+                        cliente.getApellido())
+                .email(StringUtils.hasText(request.email()) ? request.email() :
+                        cliente.getEmail())
+                .telefono(StringUtils.hasText(request.telefono()) ? request.telefono() :
+                        cliente.getTelefono())
+                .empresa(StringUtils.hasText(request.empresa()) ? request.empresa() :
+                        cliente.getEmpresa())
+                .isActivo(Objects.nonNull(request.activo()) ? request.activo() :
+                        cliente.getIsActivo())
+                .build();
+
+        System.out.println("CLIENTE UPDATE: " + clienteUpdate);
+
+        clienteJpaRepository.save(clienteUpdate);
+
+//        return null;
     }
 
     @Override
     public void delete(Long id) {
+
+        log.info("***** ELIMINACION LOGICA DE CLIENTE *****");
+        ClienteEntity cliente = clienteJpaRepository.findById(id)
+                .orElseThrow(() -> {
+                            log.warn("Cliente no encontrado con id: {}", id);
+                            throw new ClienteException("Cliente no encontrado con id: %s", String.valueOf(id));
+                        }
+                );
+
+        log.info("CLIENTE OBTENIDO: {}", cliente.getId());
+        ClienteEntity clienteDisables = cliente.toBuilder()
+                .isActivo(false)
+                .build();
+
+        log.info("CLIENTE ACTUALIZADO: {}", clienteDisables.getId());
+
+        clienteJpaRepository.save(clienteDisables);
 
     }
 }
