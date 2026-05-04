@@ -62,14 +62,12 @@ CREATE TABLE cliente (
 DROP TABLE IF EXISTS tecnico CASCADE;
 CREATE TABLE tecnico (
                           id SERIAL PRIMARY KEY COMMENT 'Identificador único',
+                          identificacion VARCHAR(20) UNIQUE COMMENT 'Identificación único',,
                           nombre VARCHAR(100) NOT NULL COMMENT 'Nombre del técnico',
                           apellido VARCHAR(100) NOT NULL COMMENT 'Apellido del técnico',
-                          email VARCHAR(150) NOT NULL UNIQUE COMMENT 'Correo electrónico',
                           telefono VARCHAR(20) COMMENT 'Teléfono de contacto',
-                          rol VARCHAR(50) NOT NULL COMMENT 'Rol: SUPERVISOR, NIVEL1, NIVEL2, NIVEL3, ADMIN',
-                          especialidad VARCHAR(200) COMMENT 'Área de especialización',
-                          activo BOOLEAN DEFAULT TRUE COMMENT 'Técnico activo',
-                          contratado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de contratación'
+                          is_activo BOOLEAN DEFAULT TRUE COMMENT 'Técnico activo',
+                          fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de contratación'
 ) COMMENT='Información de técnicos de soporte';
 
 -- 2.4 Tabla de tickets (principal)

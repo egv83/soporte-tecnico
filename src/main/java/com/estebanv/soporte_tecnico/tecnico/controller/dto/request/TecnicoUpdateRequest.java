@@ -1,22 +1,17 @@
-package com.estebanv.soporte_tecnico.cliente.controller.request;
+package com.estebanv.soporte_tecnico.tecnico.controller.dto.request;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 
-public record ClienteUpdateRequest(
+public record TecnicoUpdateRequest(
 
         String nombre,
         String apellido,
-
-        @Email(message = "Ingrese un email valido")
-        String email,
 
         @Pattern(
                 regexp = "^\\+?[0-9]{7,12}$",
                 message = "El teléfono debe tener entre 7 a 12 dígitos, puede incluir + al inicio"
         )
         String telefono,
-        String empresa,
         Boolean activo
 ) {
 }

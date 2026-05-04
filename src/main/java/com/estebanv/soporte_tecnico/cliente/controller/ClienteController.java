@@ -2,10 +2,13 @@ package com.estebanv.soporte_tecnico.cliente.controller;
 
 import com.estebanv.soporte_tecnico.cliente.controller.request.ClienteCreateRequest;
 import com.estebanv.soporte_tecnico.cliente.controller.request.ClienteUpdateRequest;
+import com.estebanv.soporte_tecnico.cliente.entities.ClienteEntity;
 import com.estebanv.soporte_tecnico.cliente.service.ClienteCommandService;
 import com.estebanv.soporte_tecnico.cliente.service.ClienteQueryService;
-import com.estebanv.soporte_tecnico.user.service.UsuarioService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/v1/clientes")
+@RequestMapping("/v1/clientes")
 public class ClienteController {
 
     private final ClienteQueryService clienteQueryService;
@@ -33,6 +36,21 @@ public class ClienteController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(clientes);
+    }
+
+    @GetMapping("/entity-page")
+    public ResponseEntity<Page<ClienteEntity>> getClientePage(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of( ((page>=1) ? page-1 : 0) ,size );
+         var clientes = clienteQueryService.getAllClientes(pageable);
+
+         if(clientes.isEmpty()){
+             return ResponseEntity.noContent().build();
+         }
+
+         return ResponseEntity.ok(clientes);
     }
 
     @GetMapping("/{id}")
@@ -58,7 +76,7 @@ public class ClienteController {
             @RequestBody ClienteUpdateRequest request,
             @PathVariable("id") Long id
     ) {
-        clienteCommandService.update(request,id);
+        clienteCommandService.update(request, id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

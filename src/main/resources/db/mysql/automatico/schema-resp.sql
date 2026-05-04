@@ -45,10 +45,12 @@ CREATE TABLE cliente (
 -- =====================================================
 CREATE TABLE tecnico (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                          identificacion VARCHAR(20) UNIQUE,
                           nombre VARCHAR(100) NOT NULL,
                           apellido VARCHAR(100) NOT NULL,
+                          email VARCHAR(150) NOT NULL UNIQUE,
                           telefono VARCHAR(20),
+                          rol VARCHAR(50) NOT NULL,
+                          especialidad VARCHAR(200),
                           is_activo BOOLEAN DEFAULT TRUE,
                           fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

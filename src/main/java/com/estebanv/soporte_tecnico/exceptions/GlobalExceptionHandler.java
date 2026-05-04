@@ -2,6 +2,7 @@ package com.estebanv.soporte_tecnico.exceptions;
 
 import com.estebanv.soporte_tecnico.cliente.exception.ClienteException;
 import com.estebanv.soporte_tecnico.dto.ErrorResponse;
+import com.estebanv.soporte_tecnico.tecnico.exception.TecnicoException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.dao.DataAccessException;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,6 +88,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ClienteException.class)
     public ResponseEntity<ErrorResponse> handleClienteError(ClienteException ex) {
         log.error("Error en el módulo de clientes: {}",ex.getMessage(), ex);
+        ErrorResponse errorResponse = ErrorResponse.create(
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(TecnicoException.class)
+    public ResponseEntity<ErrorResponse> handleTecnicoError(TecnicoException ex) {
+        log.error("Error en el módulo de técnico: {}",ex.getMessage(), ex);
         ErrorResponse errorResponse = ErrorResponse.create(
                 ex.getMessage(),
                 HttpStatus.NOT_FOUND.value()

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, Long> {
 
-    Optional<ClienteEntity> findById(String nombre);
+    Optional<ClienteEntity> findById(Long id);
 
     @Query(
             nativeQuery = false,

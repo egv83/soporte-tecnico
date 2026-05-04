@@ -12,6 +12,8 @@ import com.estebanv.soporte_tecnico.cliente.service.ClienteQueryService;
 import com.estebanv.soporte_tecnico.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -56,7 +58,15 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
                 .stream()
                 .map(
                         clienteMapper::toResponse
-                ).toList();
+                )
+                .toList();
+    }
+
+    @Override
+    public Page<ClienteEntity> getAllClientes(Pageable pageable) {
+        log.info("***** CONSULTA DE CLIENTE PAGE *****");
+
+        return clienteJpaRepository.findAll(pageable);
     }
 
     @Override
@@ -115,8 +125,6 @@ public class ClienteServiceImpl implements ClienteQueryService, ClienteCommandSe
         System.out.println("CLIENTE UPDATE: " + clienteUpdate);
 
         clienteJpaRepository.save(clienteUpdate);
-
-//        return null;
     }
 
     @Override
