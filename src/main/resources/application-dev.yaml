@@ -20,4 +20,4 @@ spring:
 #      always never
       mode: never
       schema-locations: classpath:db/mysql/automatico/schema.sql
-#      data-locations: classpath:db/mysql/automatico/data.sql
+      data-locations: classpath:db/mysql/automatico/data.sql

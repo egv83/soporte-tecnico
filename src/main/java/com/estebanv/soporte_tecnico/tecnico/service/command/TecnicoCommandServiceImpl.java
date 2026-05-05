@@ -41,7 +41,7 @@ public class TecnicoCommandServiceImpl implements TecnicoCommandService {
                         .nombre(request.nombre())
                         .apellido(request.apellido())
                         .telefono(request.telefono())
-                        .isActived(Boolean.TRUE)
+                        .isActivo(Boolean.TRUE)
                         .fechaRegistro(LocalDateTime.now())
                         .build()
         ), TecnicoResponse.class);
@@ -66,8 +66,8 @@ public class TecnicoCommandServiceImpl implements TecnicoCommandService {
                         tecnico.getApellido())
                 .telefono(StringUtils.hasText(request.telefono()) ? request.telefono() :
                         tecnico.getTelefono())
-                .isActived(Objects.nonNull(request.activo()) ? request.activo() :
-                        tecnico.getIsActived())
+                .isActivo(Objects.nonNull(request.activo()) ? request.activo() :
+                        tecnico.getIsActivo())
                 .build();
 
         System.out.println("CLIENTE UPDATE: " + tecnicoUpdate);
@@ -89,7 +89,7 @@ public class TecnicoCommandServiceImpl implements TecnicoCommandService {
 
         log.info("TÉCNICO OBTENIDO: {}", tecnico.getId());
         TecnicoEntity tecnicoDisabled = tecnico.toBuilder()
-                .isActived(false)
+                .isActivo(false)
                 .build();
 
         log.info("TÉCNICO ACTUALIZADO: {}", tecnicoDisabled.getId());

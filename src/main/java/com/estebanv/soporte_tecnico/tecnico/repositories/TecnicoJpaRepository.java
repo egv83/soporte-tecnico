@@ -15,7 +15,7 @@ public interface TecnicoJpaRepository extends JpaRepository<TecnicoEntity, Long>
 
     @Query(
             nativeQuery = false,
-            value = "SELECT t FROM TecnicoEntity t WHERE t.isActived = true AND t.id = :id"
+            value = "SELECT t FROM TecnicoEntity t WHERE t.isActivo = true AND t.id = :id"
     )
     Optional<TecnicoEntity> findByIdActivo(@Param("id") Long id);
 
@@ -23,7 +23,7 @@ public interface TecnicoJpaRepository extends JpaRepository<TecnicoEntity, Long>
 
     @Query(
             nativeQuery = false,
-            value = "SELECT t FROM TecnicoEntity t WHERE t.isActived = true"
+            value = "SELECT t FROM TecnicoEntity t WHERE t.isActivo = true"
     )
     Optional<TecnicoEntity> findAllByIsActivo(Long id);
 

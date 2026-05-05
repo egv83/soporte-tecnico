@@ -4,6 +4,9 @@
 -- Configuración: spring.sql.init.mode=always
 -- =====================================================
 
+-- 1. Eliminar vistas primero (dependen de tablas)
+DROP VIEW IF EXISTS vw_tickets_detalle;
+
 -- Eliminar tablas si existen (para reinicio limpio)
 DROP TABLE IF EXISTS historial_ticket;
 DROP TABLE IF EXISTS comentario;
@@ -21,7 +24,7 @@ CREATE TABLE categoria (
                             nombre VARCHAR(100) NOT NULL UNIQUE,
                             descripcion VARCHAR(500),
                             tiempo_estimado_horas INT,
-                            activo BOOLEAN DEFAULT TRUE,
+                            is_activo BOOLEAN DEFAULT TRUE,
                             fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -70,7 +73,7 @@ CREATE TABLE ticket (
                          fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                          fecha_cierre TIMESTAMP NULL,
                          tiempo_resolucion_horas INT,
-                         activo BOOLEAN DEFAULT TRUE,
+                         is_activo BOOLEAN DEFAULT TRUE,
                          FOREIGN KEY (cliente_id) REFERENCES cliente(id),
                          FOREIGN KEY (tecnico_asignado_id) REFERENCES tecnico(id),
                          FOREIGN KEY (categoria_id) REFERENCES categoria(id)
@@ -121,8 +124,61 @@ CREATE TABLE usuario (
                                   created_at DATETIME
 );
 
--- Crear índices para rendimiento
-CREATE INDEX idx_tickets_estado ON ticket(estado);
-CREATE INDEX idx_tickets_cliente ON ticket(cliente_id);
-CREATE INDEX idx_tickets_tecnico ON ticket(tecnico_asignado_id);
-CREATE INDEX idx_comentarios_ticket ON comentario(ticket_id);
+-- =====================================================
+-- VISTA: Tickets detallados
+-- =====================================================
+-- Detalle de tickets con información desnormalizada
+DROP VIEW IF EXISTS vw_tickets_detalle;
+CREATE VIEW vw_tickets_detalle AS
+SELECT
+    t.id,
+    t.numero_ticket,
+    t.titulo,
+    SUBSTRING(t.descripcion, 1, 100) AS descripcion_resumida,
+    t.estado,
+    t.prioridad,
+    -- Datos del cliente
+    CONCAT(c.nombre, ' ', c.apellido) AS cliente_nombre,
+    c.email AS cliente_email,
+    c.telefono AS cliente_telefono,
+    c.empresa AS cliente_empresa,
+    -- Datos del técnico
+    CONCAT(tec.nombre, ' ', tec.apellido) AS tecnico_nombre,
+    tec.telefono AS tecnico_telefono,
+    -- Datos de la categoría
+    cat.nombre AS categoria_nombre,
+    cat.tiempo_estimado_horas AS categoria_tiempo_estimado,
+    -- Fechas formateadas
+    DATE_FORMAT(t.fecha_creacion, '%Y-%m-%d %H:%i') AS fecha_creacion,
+    DATE_FORMAT(t.fecha_actualizacion, '%Y-%m-%d %H:%i') AS fecha_actualizacion,
+    DATE_FORMAT(t.fecha_cierre, '%Y-%m-%d %H:%i') AS fecha_cierre,
+    -- Tiempos calculados
+    t.tiempo_resolucion_horas,
+    TIMESTAMPDIFF(HOUR, t.fecha_creacion, NOW()) AS horas_transcurridas,
+    -- Descripción legible del estado
+    CASE t.estado
+        WHEN 'ABIERTO' THEN 'Abierto - Pendiente de atencion'
+        WHEN 'EN_PROCESO' THEN 'En proceso - Siendo atendido'
+        WHEN 'EN_ESPERA' THEN 'En espera - Requiere informacion'
+        WHEN 'RESUELTO' THEN 'Resuelto - Pendiente confirmacion'
+        WHEN 'CERRADO' THEN 'Cerrado - Finalizado'
+        WHEN 'CANCELADO' THEN 'Cancelado'
+        END AS estado_descripcion,
+    -- Indicador visual de prioridad
+    CASE t.prioridad
+        WHEN 'CRITICA' THEN 'CRITICA - Atencion inmediata'
+        WHEN 'ALTA' THEN 'ALTA - Prioridad maxima'
+        WHEN 'MEDIA' THEN 'MEDIA - Prioridad normal'
+        WHEN 'BAJA' THEN 'BAJA - Sin urgencia'
+        END AS prioridad_visual,
+    -- Estado del ticket basado en su estado actual
+    CASE
+        WHEN t.estado IN ('ABIERTO', 'EN_PROCESO', 'EN_ESPERA') THEN 'EN CURSO'
+        WHEN t.estado IN ('RESUELTO', 'CERRADO') THEN 'FINALIZADO'
+        WHEN t.estado = 'CANCELADO' THEN 'CANCELADO'
+        ELSE t.estado
+        END AS estado_ticket
+FROM ticket t
+         LEFT JOIN cliente c ON t.cliente_id = c.id AND c.is_activo = 1
+         LEFT JOIN tecnico tec ON t.tecnico_asignado_id = tec.id AND tec.is_activo = 1
+         LEFT JOIN categoria cat ON t.categoria_id = cat.id AND cat.is_activo = 1;

@@ -13,6 +13,6 @@ public class TecnicoResponse {
     private String nombre;
     private String apellido;
     private String telefono;
-    private Boolean isActived;
+    private Boolean isActivo;
 
 }

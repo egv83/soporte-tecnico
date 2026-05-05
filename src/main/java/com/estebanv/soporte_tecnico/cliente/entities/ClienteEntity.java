@@ -1,9 +1,12 @@
 package com.estebanv.soporte_tecnico.cliente.entities;//package com.estebanv.soporte_tecnico.entities;
 
+import com.estebanv.soporte_tecnico.ticket.entities.TicketEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder(toBuilder = true)
 @Getter
@@ -42,5 +45,12 @@ public class ClienteEntity {
 
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<TicketEntity> tickets = new ArrayList<>();
+
+//    public String getNombreCompleto() {
+//        return nombre + " " + apellido;
+//    }
 
 }

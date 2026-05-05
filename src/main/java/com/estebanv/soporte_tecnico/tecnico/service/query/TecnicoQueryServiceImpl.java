@@ -50,7 +50,7 @@ public class TecnicoQueryServiceImpl implements TecnicoQueryService {
         return tecnicoJpaRepository.findByIdActivo(id).
                 map(
                         entity -> {
-                            if (!entity.getIsActived()) {
+                            if (!entity.getIsActivo()) {
                                 throw new TecnicoException("El Técnico esta inactivo");
                             }
                             return modelMapper.map(entity, TecnicoResponse.class);

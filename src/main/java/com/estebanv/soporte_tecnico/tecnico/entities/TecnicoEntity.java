@@ -1,5 +1,7 @@
 package com.estebanv.soporte_tecnico.tecnico.entities;//package com.estebanv.soporte_tecnico.entities;
 
+import com.estebanv.soporte_tecnico.ticket.entities.ComentarioEntity;
+import com.estebanv.soporte_tecnico.ticket.entities.TicketEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder(toBuilder = true)
 @Getter
@@ -34,9 +38,15 @@ public class TecnicoEntity {
     private String telefono;
 
     @Column(name = "is_activo")
-    private Boolean isActived;
+    private Boolean isActivo;
 
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
+
+    @OneToMany(mappedBy = "tecnicoAsignado")
+    private List<TicketEntity> ticketsAsignados = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tecnico")
+    private List<ComentarioEntity> comentarios = new ArrayList<>();
 
 }
