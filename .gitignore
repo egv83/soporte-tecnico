@@ -1,7 +1,6 @@
 /.idea/
-/target/*
-/target/classes/db/mysql/automatico/data.sql
-/target/classes/db/mysql/automatico/schema.sql
-/target/classes/db/mysql/manual/01_create_database.sql
-/target/classes/db/mysql/manual/02_insert_seed_data.sql
-/target/classes/db/mysql/manual/03_create_views.sql
+
+target/
+*.class
+*.jar
+*.war
