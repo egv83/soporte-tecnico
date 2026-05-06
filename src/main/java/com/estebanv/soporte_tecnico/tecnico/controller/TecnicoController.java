@@ -1,6 +1,5 @@
 package com.estebanv.soporte_tecnico.tecnico.controller;
 
-import com.estebanv.soporte_tecnico.cliente.controller.request.ClienteUpdateRequest;
 import com.estebanv.soporte_tecnico.tecnico.controller.dto.request.TecnicoCreateRequest;
 import com.estebanv.soporte_tecnico.tecnico.controller.dto.request.TecnicoUpdateRequest;
 import com.estebanv.soporte_tecnico.tecnico.controller.dto.response.TecnicoResponse;

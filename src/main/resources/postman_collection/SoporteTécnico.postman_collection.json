@@ -319,6 +319,67 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "TICKETS",
+      "item": [
+        {
+          "name": "Ticket Reporte",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/v1/tickets/reporte?page=1&size=3&estado=ABIERTO",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "tickets",
+                "reporte"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "3"
+                },
+                {
+                  "key": "texto",
+                  "value": "SERVIDOR",
+                  "disabled": true
+                },
+                {
+                  "key": "estado",
+                  "value": "ABIERTO"
+                },
+                {
+                  "key": "prioridad",
+                  "value": "CRITICA",
+                  "disabled": true
+                },
+                {
+                  "key": "field",
+                  "value": "id,clienteNombre",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "ASC",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
