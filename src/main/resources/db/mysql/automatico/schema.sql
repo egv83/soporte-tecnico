@@ -73,7 +73,6 @@ CREATE TABLE ticket (
                          fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                          fecha_cierre TIMESTAMP NULL,
                          tiempo_resolucion_horas INT,
-                         is_activo BOOLEAN DEFAULT TRUE,
                          FOREIGN KEY (cliente_id) REFERENCES cliente(id),
                          FOREIGN KEY (tecnico_asignado_id) REFERENCES tecnico(id),
                          FOREIGN KEY (categoria_id) REFERENCES categoria(id)

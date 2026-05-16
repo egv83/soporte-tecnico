@@ -1,6 +1,6 @@
 package com.estebanv.soporte_tecnico.ticket.mapper;
 
-import com.estebanv.soporte_tecnico.ticket.controller.dto.TicketVOResponse;
+import com.estebanv.soporte_tecnico.ticket.controller.dto.response.TicketVOResponse;
 import com.estebanv.soporte_tecnico.ticket.entities.TicketVOEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -16,5 +16,5 @@ public interface TicketVOMapStruckts {
     TicketVOResponse toResponse(TicketVOEntity entity);
 
     // Mapeo de listas
-    List<TicketVOResponse> toResponseList(List<TicketVOEntity> entities);
+//    List<TicketVOResponse> toResponseList(List<TicketVOEntity> entities);
 }

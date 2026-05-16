@@ -1,6 +1,5 @@
 package com.estebanv.soporte_tecnico.tecnico.service.query;
 
-import com.estebanv.soporte_tecnico.cliente.exception.ClienteException;
 import com.estebanv.soporte_tecnico.exceptions.ResourceNotFoundException;
 import com.estebanv.soporte_tecnico.tecnico.controller.dto.response.TecnicoResponse;
 import com.estebanv.soporte_tecnico.tecnico.entities.TecnicoEntity;

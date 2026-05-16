@@ -1,4 +1,4 @@
-package com.estebanv.soporte_tecnico.ticket.controller.dto;
+package com.estebanv.soporte_tecnico.ticket.controller.dto.response;
 
 
 public record TicketVOResponse(

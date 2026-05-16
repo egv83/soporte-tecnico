@@ -1,10 +1,9 @@
 package com.estebanv.soporte_tecnico.ticket.entities;
 
-import com.estebanv.soporte_tecnico.categoria.entities.CategoriaEntity;
 import com.estebanv.soporte_tecnico.cliente.entities.ClienteEntity;
 import com.estebanv.soporte_tecnico.tecnico.entities.TecnicoEntity;
-import com.estebanv.soporte_tecnico.ticket.enums.EstadoTicket;
-import com.estebanv.soporte_tecnico.ticket.enums.Prioridad;
+import com.estebanv.soporte_tecnico.ticket.enums.EstadoEnum;
+import com.estebanv.soporte_tecnico.ticket.enums.PrioridadEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,11 +37,11 @@ public class TicketEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private EstadoTicket estado = EstadoTicket.ABIERTO;
+    private EstadoEnum estado;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private Prioridad prioridad = Prioridad.MEDIA;
+    private PrioridadEnum prioridad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
@@ -77,7 +76,5 @@ public class TicketEntity {
     @Column(name = "tiempo_resolucion_horas")
     private Integer tiempoResolucionHoras;
 
-    @Column(nullable = false)
-    private Boolean activo = true;
 
 }

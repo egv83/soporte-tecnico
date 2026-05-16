@@ -1,6 +1,6 @@
 package com.estebanv.soporte_tecnico.ticket.service;
 
-import com.estebanv.soporte_tecnico.ticket.controller.dto.TicketVOResponse;
+import com.estebanv.soporte_tecnico.ticket.controller.dto.response.TicketVOResponse;
 import org.springframework.data.domain.Page;
 
 public interface TicketQueryService {

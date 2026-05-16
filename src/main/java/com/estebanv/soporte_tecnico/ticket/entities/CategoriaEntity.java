@@ -1,15 +1,20 @@
-package com.estebanv.soporte_tecnico.categoria.entities;//package com.estebanv.soporte_tecnico.entities;
+package com.estebanv.soporte_tecnico.ticket.entities;//package com.estebanv.soporte_tecnico.entities;
 
-import com.estebanv.soporte_tecnico.ticket.entities.TicketEntity;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder(toBuilder = true)
+@Getter
 @Entity
 @Table(name = "categoria")
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class CategoriaEntity {
 
     @Id

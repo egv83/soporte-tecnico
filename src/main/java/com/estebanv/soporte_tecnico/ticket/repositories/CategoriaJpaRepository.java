@@ -1,6 +1,6 @@
-package com.estebanv.soporte_tecnico.categoria.repositories;//package com.estebanv.soporte_tecnico.repositories;
+package com.estebanv.soporte_tecnico.ticket.repositories;//package com.estebanv.soporte_tecnico.repositories;
 
-import com.estebanv.soporte_tecnico.categoria.entities.CategoriaEntity;
+import com.estebanv.soporte_tecnico.ticket.entities.CategoriaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

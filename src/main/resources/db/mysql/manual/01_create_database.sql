@@ -83,7 +83,6 @@ CREATE TABLE ticket (
                         fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Última fecha de actualización',
                         fecha_cierre TIMESTAMP NULL COMMENT 'Fecha de cierre del ticket',
                         tiempo_resolucion_horas INT COMMENT 'Horas totales para resolver el ticket',
-                        is_activo BOOLEAN DEFAULT TRUE COMMENT 'Ticket activo/inactivo',
 
     -- Llaves foráneas
                         FOREIGN KEY (cliente_id) REFERENCES cliente(id) ON DELETE RESTRICT,

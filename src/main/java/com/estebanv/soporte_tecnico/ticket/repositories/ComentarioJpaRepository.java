@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ComentarioRepository extends JpaRepository<ComentarioEntity, Long> {
+public interface ComentarioJpaRepository extends JpaRepository<ComentarioEntity, Long> {
 
     Page<ComentarioEntity> findByTicketId(Long ticketId, Pageable pageable);
 
