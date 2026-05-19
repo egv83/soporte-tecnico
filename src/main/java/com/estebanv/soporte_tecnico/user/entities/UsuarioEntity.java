@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @Entity
 @Table(name = "usuario")

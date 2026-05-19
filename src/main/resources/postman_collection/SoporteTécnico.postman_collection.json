@@ -12,6 +12,16 @@
         {
           "name": "Get Cliente-by-id",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -34,6 +44,16 @@
         {
           "name": "GetClientes",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -55,6 +75,16 @@
         {
           "name": "Get Clientes - Entity page",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -87,6 +117,16 @@
         {
           "name": "POST Clientes",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
@@ -117,6 +157,16 @@
         {
           "name": "PUT Clientes",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -148,6 +198,16 @@
         {
           "name": "DELETE Logico Clientes",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
             "url": {
@@ -175,10 +235,20 @@
         {
           "name": "GetTecnicos Page DTO",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8081/api/v1/tecnicos/dto-page?page=1&size=1",
+              "raw": "http://localhost:8081/api/v1/tecnicos/dto-page?page=1&size=3",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -197,7 +267,7 @@
                 },
                 {
                   "key": "size",
-                  "value": "1"
+                  "value": "3"
                 }
               ]
             }
@@ -207,6 +277,16 @@
         {
           "name": "GetTecnico BY ID DTO",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -229,6 +309,16 @@
         {
           "name": "POST Técnico",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "body": {
@@ -259,6 +349,16 @@
         {
           "name": "PUT Técnico",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "PUT",
             "header": [],
             "body": {
@@ -290,6 +390,16 @@
         {
           "name": "DELETE Técnico",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "DELETE",
             "header": [],
             "body": {
@@ -326,6 +436,16 @@
         {
           "name": "Ticket Reporte",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
@@ -352,7 +472,7 @@
                 },
                 {
                   "key": "texto",
-                  "value": "SERVIDOR",
+                  "value": "TKT-1778561275231",
                   "disabled": true
                 },
                 {
@@ -374,6 +494,208 @@
                   "value": "ASC",
                   "disabled": true
                 }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Ticket",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"Prueba de creación CON TIMEmILLES\",\n    \"descripcion\": \"Se esta probando la creación de tickets\",\n    \"prioridad\": \"baja\",\n    \"clienteId\": \"10\",\n    \"categoriaId\": \"1\",\n    \"comentario\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/v1/tickets",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "tickets"
+              ],
+              "query": [
+                {
+                  "key": "texto",
+                  "value": "SERVIDOR",
+                  "disabled": true
+                },
+                {
+                  "key": "prioridad",
+                  "value": "CRITICA",
+                  "disabled": true
+                },
+                {
+                  "key": "field",
+                  "value": "id,clienteNombre",
+                  "disabled": true
+                },
+                {
+                  "key": "order",
+                  "value": "ASC",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Ticket",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    /*\"titulo\": \"Prueba de creación CON TIMEmILLES\",*/\n    \"descripcion\": \"Se esta probando la actualización de tickets\",\n    /*\"estado\":\"\",*/\n    /*\"prioridad\": \"baja\",*/\n    \"tecnicoId\":\"1\",\n    /*\"categoriaId\": \"1\",*/\n    /*\"comentarioInterno\":\"\",*/\n    \"comentario\": \"Probando actualización\"\n    \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/v1/tickets/TKT-1778561275231",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "tickets",
+                "TKT-1778561275231"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AUTHENTICATION",
+      "item": [
+        {
+          "name": "LOGIN",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var loginData = pm.response.json();",
+                  "var token = loginData[\"token\"];",
+                  "pm.environment.set(\"token\",token)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\":\"esteban\",\n    \"password\":\"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/auth/v1/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "auth",
+                "v1",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "USUARIO",
+      "item": [
+        {
+          "name": "Crear Usuario",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\":\"esteban\",\n    \"password\":\"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/api/v1/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "v1",
+                "user"
               ]
             }
           },

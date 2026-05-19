@@ -4,6 +4,7 @@ import com.estebanv.soporte_tecnico.cliente.exception.ClienteException;
 import com.estebanv.soporte_tecnico.dto.ErrorResponse;
 import com.estebanv.soporte_tecnico.tecnico.exception.TecnicoException;
 import com.estebanv.soporte_tecnico.ticket.exception.TicketException;
+import com.estebanv.soporte_tecnico.user.exceptions.UsuarioExceptions;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.dao.DataAccessException;
@@ -109,6 +110,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(TicketException.class)
     public ResponseEntity<ErrorResponse> handleTicketError(TicketException ex) {
+        log.error("Error en el módulo de ticket: {}", ex.getMessage(), ex);
+        ErrorResponse errorResponse = ErrorResponse.create(
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(UsuarioExceptions.class)
+    public ResponseEntity<ErrorResponse> handleUsuarioError(UsuarioExceptions ex) {
         log.error("Error en el módulo de ticket: {}", ex.getMessage(), ex);
         ErrorResponse errorResponse = ErrorResponse.create(
                 ex.getMessage(),

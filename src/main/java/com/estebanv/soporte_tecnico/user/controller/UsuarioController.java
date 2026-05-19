@@ -1,12 +1,15 @@
 package com.estebanv.soporte_tecnico.user.controller;
 
+import com.estebanv.soporte_tecnico.user.controller.dto.request.UserCreateRequest;
 import com.estebanv.soporte_tecnico.user.controller.dto.request.UserUpdateRequest;
 import com.estebanv.soporte_tecnico.user.service.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/v1/user")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -15,12 +18,18 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @PostMapping
+    public ResponseEntity<?> create(@Validated @RequestBody UserCreateRequest request) {
+
+        return new ResponseEntity<>(usuarioService.create(request), HttpStatus.CREATED);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> update(
             @PathVariable Long id,
             @RequestBody UserUpdateRequest request
-    ){
-        usuarioService.updateUserPassword(request,id);
+    ) {
+        usuarioService.updateUserPassword(request, id);
         return ResponseEntity.ok().build();
     }
 
