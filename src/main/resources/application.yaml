@@ -7,7 +7,9 @@ spring:
     name: api-soporte-tecnico
   profiles:
     active: dev
-    #active: qa
+#    active: qa
+#    active: uat
+#    active: prod
 
   # Logging para ver qué está pasando
   logging:

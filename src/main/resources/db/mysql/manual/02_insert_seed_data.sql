@@ -97,34 +97,33 @@ VALUES
 -- =====================================================
 
 -- Tickets activos (abiertos y en proceso)
-INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, categoria_id, fecha_creacion,
-                    is_activo)
+INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, categoria_id, fecha_creacion)
 VALUES ('INC2024001', 'PC no enciende después de actualización',
         'La computadora no arranca después de instalar actualizaciones de Windows', 'ABIERTO', 'ALTA', 1, 1,
-        DATE_SUB(NOW(), INTERVAL 5 DAY), TRUE),
+        DATE_SUB(NOW(), INTERVAL 5 DAY)),
        ('INC2024002', 'Impresora no imprime en red',
         'La impresora compartida no responde a las solicitudes de impresión', 'ABIERTO', 'MEDIA', 2, 2,
-        DATE_SUB(NOW(), INTERVAL 3 DAY), TRUE),
+        DATE_SUB(NOW(), INTERVAL 3 DAY)),
        ('INC2024003', 'VPN caída - usuarios remotos', 'Los empleados no pueden conectar a la VPN desde casa',
-        'EN_PROCESO', 'CRITICA', 4, 8, DATE_SUB(NOW(), INTERVAL 2 DAY), TRUE),
+        'EN_PROCESO', 'CRITICA', 4, 8, DATE_SUB(NOW(), INTERVAL 2 DAY)),
        ('INC2024004', 'Base de datos lenta', 'Las consultas a producción están tomando más de 30 segundos',
-        'EN_PROCESO', 'ALTA', 6, 11, DATE_SUB(NOW(), INTERVAL 2 DAY), TRUE),
+        'EN_PROCESO', 'ALTA', 6, 11, DATE_SUB(NOW(), INTERVAL 2 DAY)),
        ('INC2024005', 'Error de autenticación', 'Usuarios no pueden iniciar sesión en el ERP', 'EN_PROCESO', 'CRITICA',
-        7, 14, DATE_SUB(NOW(), INTERVAL 1 DAY), TRUE),
+        7, 14, DATE_SUB(NOW(), INTERVAL 1 DAY)),
 
 -- Tickets resueltos/cerrados
        ('INC2024006', 'Problema con correo saliente', 'Los correos no se envían correctamente', 'RESUELTO', 'MEDIA', 3,
-        15, DATE_SUB(NOW(), INTERVAL 10 DAY), TRUE),
+        15, DATE_SUB(NOW(), INTERVAL 10 DAY)),
        ('INC2024007', 'Backup fallido', 'El backup nocturno no se completa', 'CERRADO', 'ALTA', 5, 14,
-        DATE_SUB(NOW(), INTERVAL 15 DAY), TRUE),
+        DATE_SUB(NOW(), INTERVAL 15 DAY)),
        ('INC2024008', 'Lentitud en sitio web', 'El sitio corporativo carga muy lento', 'RESUELTO', 'MEDIA', 8, 16,
-        DATE_SUB(NOW(), INTERVAL 7 DAY), TRUE),
+        DATE_SUB(NOW(), INTERVAL 7 DAY)),
 
 -- Tickets en espera
        ('INC2024009', 'Actualizar certificados SSL', 'Los certificados SSL expiran en 5 días', 'EN_ESPERA', 'ALTA', 9,
-        16, DATE_SUB(NOW(), INTERVAL 3 DAY), TRUE),
+        16, DATE_SUB(NOW(), INTERVAL 3 DAY)),
        ('INC2024010', 'Migración de servidor', 'Planificar migración de servidor de BD', 'EN_ESPERA', 'BAJA', 10, 3,
-        DATE_SUB(NOW(), INTERVAL 4 DAY), TRUE);
+        DATE_SUB(NOW(), INTERVAL 4 DAY));
 
 -- =====================================================
 -- 5. ASIGNAR TÉCNICOS A TICKETS

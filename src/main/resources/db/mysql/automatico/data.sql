@@ -53,63 +53,63 @@ VALUES ('TEC-001', 'Roberto', 'García', '555-1001', TRUE),
 
 -- Ticket 1: Abierto - Prioridad Alta (Hardware)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024001', 'Computadora no enciende', 'La PC no responde al botón de encendido después de un apagón',
-        'ABIERTO', 'ALTA', 1, NULL, 1, DATE_SUB(NOW(), INTERVAL 2 DAY), TRUE);
+        'ABIERTO', 'ALTA', 1, NULL, 1, DATE_SUB(NOW(), INTERVAL 2 DAY));
 
 -- Ticket 2: En Proceso - Prioridad Crítica (Base de Datos)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024002', 'Servidor BD lento', 'Consultas muy lentas en producción afectando el rendimiento', 'EN_PROCESO',
-        'CRITICA', 2, 2, 4, DATE_SUB(NOW(), INTERVAL 1 DAY), TRUE);
+        'CRITICA', 2, 2, 4, DATE_SUB(NOW(), INTERVAL 1 DAY));
 
 -- Ticket 3: Resuelto (Hardware)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, fecha_cierre, tiempo_resolucion_horas, is_activo)
+                    categoria_id, fecha_creacion, fecha_cierre, tiempo_resolucion_horas)
 VALUES ('TKT-2024003', 'Error de impresión', 'No se puede imprimir desde ninguna aplicación', 'RESUELTO', 'MEDIA', 3, 3,
-        1, DATE_SUB(NOW(), INTERVAL 5 DAY), DATE_SUB(NOW(), INTERVAL 3 DAY), 48, TRUE);
+        1, DATE_SUB(NOW(), INTERVAL 5 DAY), DATE_SUB(NOW(), INTERVAL 3 DAY), 48);
 
 -- Ticket 4: Cerrado (Software)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, fecha_cierre, tiempo_resolucion_horas, is_activo)
+                    categoria_id, fecha_creacion, fecha_cierre, tiempo_resolucion_horas)
 VALUES ('TKT-2024004', 'Actualizar sistema', 'Solicitud de actualización de software corporativo', 'CERRADO', 'BAJA', 4,
-        4, 2, DATE_SUB(NOW(), INTERVAL 10 DAY), DATE_SUB(NOW(), INTERVAL 8 DAY), 48, TRUE);
+        4, 2, DATE_SUB(NOW(), INTERVAL 10 DAY), DATE_SUB(NOW(), INTERVAL 8 DAY), 48);
 
 -- Ticket 5: En Proceso - Prioridad Alta (Redes)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024005', 'VPN no conecta', 'Usuarios remotos no pueden acceder a la red corporativa', 'EN_PROCESO',
-        'ALTA', 5, 3, 3, DATE_SUB(NOW(), INTERVAL 3 DAY), TRUE);
+        'ALTA', 5, 3, 3, DATE_SUB(NOW(), INTERVAL 3 DAY));
 
 -- Ticket 6: Abierto - Prioridad Media (Correo)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024006', 'Correos no llegan', 'Los correos salientes no están llegando a destino', 'ABIERTO', 'MEDIA', 6,
-        NULL, 6, DATE_SUB(NOW(), INTERVAL 1 DAY), TRUE);
+        NULL, 6, DATE_SUB(NOW(), INTERVAL 1 DAY));
 
 -- Ticket 7: En Proceso - Prioridad Crítica (Seguridad)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024007', 'Intento de acceso no autorizado', 'Múltiples intentos fallidos de acceso al sistema',
-        'EN_PROCESO', 'CRITICA', 7, 5, 5, DATE_SUB(NOW(), INTERVAL 1 DAY), TRUE);
+        'EN_PROCESO', 'CRITICA', 7, 5, 5, DATE_SUB(NOW(), INTERVAL 1 DAY));
 
 -- Ticket 8: Cancelado
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024008', 'Solicitud de hardware', 'Solicitud de nueva computadora (cancelada por presupuesto)',
-        'CANCELADO', 'BAJA', 8, NULL, 1, DATE_SUB(NOW(), INTERVAL 15 DAY), FALSE);
+        'CANCELADO', 'BAJA', 8, NULL, 1, DATE_SUB(NOW(), INTERVAL 15 DAY));
 
 -- Ticket 9: Abierto - Prioridad Alta (Sitio Web)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024009', 'Sitio web lento', 'El sitio web corporativo carga muy lento', 'ABIERTO', 'ALTA', 9, 6, 7,
-        DATE_SUB(NOW(), INTERVAL 2 DAY), TRUE);
+        DATE_SUB(NOW(), INTERVAL 2 DAY));
 
 -- Ticket 10: En Espera (Redes)
 INSERT INTO ticket (numero_ticket, titulo, descripcion, estado, prioridad, cliente_id, tecnico_asignado_id,
-                    categoria_id, fecha_creacion, is_activo)
+                    categoria_id, fecha_creacion)
 VALUES ('TKT-2024010', 'Problemas de conectividad', 'Pérdida de paquetes en la red local', 'EN_ESPERA', 'MEDIA', 10, 3,
-        3, DATE_SUB(NOW(), INTERVAL 4 DAY), TRUE);
+        3, DATE_SUB(NOW(), INTERVAL 4 DAY));
 
 -- =====================================================
 -- 5. Insertar Comentarios (tabla: comentario)
@@ -192,7 +192,7 @@ INSERT INTO usuario (nombre, clave, rol, is_actived, is_account_non_locked, is_a
                      is_credentials_non_expired, created_at)
 VALUES ('admin', '$2a$10$6g2CeyOg2FKniIMhrGmomuL8N90HctwCKmhS8oJ45F3csVaxDQJHC', 'ADMIN', TRUE, TRUE, TRUE, TRUE,
         NOW()),
-       ('esteban', '$2a$10$N.$2a$10$6g2CeyOg2FKniIMhrGmomuL8N90HctwCKmhS8oJ45F3csVaxDQJHC', 'SUPERVISOR', TRUE, TRUE,
+       ('esteban', '$2a$10$6g2CeyOg2FKniIMhrGmomuL8N90HctwCKmhS8oJ45F3csVaxDQJHC', 'SUPERVISOR', TRUE, TRUE,
         TRUE,
         TRUE, NOW());
 
