@@ -2,6 +2,7 @@ package com.estebanv.soporte_tecnico.tecnico.entities;//package com.estebanv.sop
 
 import com.estebanv.soporte_tecnico.ticket.entities.ComentarioEntity;
 import com.estebanv.soporte_tecnico.ticket.entities.TicketEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,9 +45,11 @@ public class TecnicoEntity {
     private LocalDateTime fechaRegistro;
 
     @OneToMany(mappedBy = "tecnicoAsignado")
+    @JsonManagedReference
     private List<TicketEntity> ticketsAsignados = new ArrayList<>();
 
     @OneToMany(mappedBy = "tecnico")
+    @JsonManagedReference
     private List<ComentarioEntity> comentarios = new ArrayList<>();
 
 }

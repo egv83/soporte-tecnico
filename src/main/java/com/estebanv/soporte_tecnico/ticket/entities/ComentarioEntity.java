@@ -2,6 +2,7 @@ package com.estebanv.soporte_tecnico.ticket.entities;
 
 import com.estebanv.soporte_tecnico.cliente.entities.ClienteEntity;
 import com.estebanv.soporte_tecnico.tecnico.entities.TecnicoEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,14 +30,17 @@ public class ComentarioEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id", nullable = false)
+    @JsonBackReference
     private TicketEntity ticket;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tecnico_id")
+    @JsonBackReference
     private TecnicoEntity tecnico;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference
     private ClienteEntity cliente;
 
     @CreationTimestamp

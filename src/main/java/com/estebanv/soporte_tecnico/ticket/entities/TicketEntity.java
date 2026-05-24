@@ -4,6 +4,8 @@ import com.estebanv.soporte_tecnico.cliente.entities.ClienteEntity;
 import com.estebanv.soporte_tecnico.tecnico.entities.TecnicoEntity;
 import com.estebanv.soporte_tecnico.ticket.enums.EstadoEnum;
 import com.estebanv.soporte_tecnico.ticket.enums.PrioridadEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -45,14 +47,17 @@ public class TicketEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
+    @JsonBackReference
     private ClienteEntity cliente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tecnico_asignado_id")
+    @JsonBackReference
     private TecnicoEntity tecnicoAsignado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", nullable = false)
+    @JsonBackReference
     private CategoriaEntity categoria;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -60,6 +65,7 @@ public class TicketEntity {
     private List<ComentarioEntity> comentarios = new ArrayList<>();
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<HistorialTicketEntity> historial = new ArrayList<>();
 
     @CreationTimestamp

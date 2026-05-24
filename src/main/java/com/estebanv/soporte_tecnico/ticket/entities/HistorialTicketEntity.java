@@ -1,5 +1,6 @@
 package com.estebanv.soporte_tecnico.ticket.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +22,7 @@ public class HistorialTicketEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id", nullable = false)
+    @JsonBackReference
     private TicketEntity ticket;
 
     @Column(name = "campo_modificado", nullable = false, length = 100)

@@ -1,6 +1,7 @@
 package com.estebanv.soporte_tecnico.cliente.entities;//package com.estebanv.soporte_tecnico.entities;
 
 import com.estebanv.soporte_tecnico.ticket.entities.TicketEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,6 +48,7 @@ public class ClienteEntity {
     private LocalDateTime fechaRegistro;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<TicketEntity> tickets = new ArrayList<>();
 
 //    public String getNombreCompleto() {
